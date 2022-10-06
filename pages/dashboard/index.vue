@@ -6,39 +6,48 @@
       </v-col>
     </v-row>
     <div v-if="dashboardData.length > 0">
-      <div v-for="group in dashboardData" :key="group.group.id">
-          <nuxt-link to="/group/aaa" tag="h3">{{ group.group.name }}</nuxt-link>
-        <v-row>
-          <v-col sm="12" md="12" lg="12">
-            <v-simple-table>
-              <template v-slot:default>
-                <thead>
-                  <tr>
-                    <th class="text-left">Name</th>
-                    <th class="text-left">Status</th>
-                    <th class="text-left">Waiting</th>
-                    <th class="text-left">Paused</th>
-                    <th class="text-left">Active</th>
-                    <th class="text-left">Delayed</th>
-                    <th class="text-left">Failed</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="item in group.queues" :key="item.id">
-                    <td>{{ item.name }}</td>
-                    <td>{{ item.status }}</td>
-                    <td>{{ item.jobCounts.waiting }}</td>
-                    <td>{{ item.jobCounts.paused }}</td>
-                    <td>{{ item.jobCounts.active }}</td>
-                    <td>{{ item.jobCounts.delayed }}</td>
-                    <td>{{ item.jobCounts.failed }}</td>
-                  </tr>
-                </tbody>
-              </template>
-            </v-simple-table>
-          </v-col>
-        </v-row>
-      </div>
+      <template v-for="group in dashboardData">
+        <div v-if="group.group" :key="group.group.id">
+          <div>
+            <nuxt-link
+              :to="'/group/' + group.group.id"
+              tag="h3"
+              style="cursor: pointer"
+              >{{ group.group.name }}</nuxt-link
+            >
+          </div>
+          <v-row>
+            <v-col sm="12" md="12" lg="12">
+              <v-simple-table>
+                <template v-slot:default>
+                  <thead>
+                    <tr>
+                      <th class="text-left">Name</th>
+                      <th class="text-left">Status</th>
+                      <th class="text-left">Waiting</th>
+                      <th class="text-left">Paused</th>
+                      <th class="text-left">Active</th>
+                      <th class="text-left">Delayed</th>
+                      <th class="text-left">Failed</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="item in group.queues" :key="item.id">
+                      <td>{{ item.name }}</td>
+                      <td>{{ item.status }}</td>
+                      <td>{{ item.jobCounts.waiting }}</td>
+                      <td>{{ item.jobCounts.paused }}</td>
+                      <td>{{ item.jobCounts.active }}</td>
+                      <td>{{ item.jobCounts.delayed }}</td>
+                      <td>{{ item.jobCounts.failed }}</td>
+                    </tr>
+                  </tbody>
+                </template>
+              </v-simple-table>
+            </v-col>
+          </v-row>
+        </div>
+      </template>
     </div>
   </div>
 </template>
@@ -47,7 +56,7 @@
 import Vue from "vue";
 import { DashGroup } from "~/types/group";
 export default Vue.extend({
-  middleware: 'auth',
+  middleware: "auth",
   name: "IndexPage",
   data() {
     return {
@@ -55,7 +64,7 @@ export default Vue.extend({
     };
   },
   async created() {
-    this.dashboardData = await this.$api.dashboard.groupDash()
+    this.dashboardData = await this.$api.dashboard.groupDash();
   },
 });
 </script>

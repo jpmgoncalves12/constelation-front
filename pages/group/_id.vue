@@ -54,8 +54,6 @@ export default Vue.extend({
   },
   async created() {
     this.groupDashboardData = await this.$api.dashboard.groupDashById(this.$route.params.id)
-    console.log(this.groupDashboardData.queues.length)
-    console.log(this.groupDashboardData.group.name)
   },
 });
 </script>
