@@ -25,9 +25,9 @@ export class DashModule {
   }
 
   public async groupDashById(id: string): Promise<DashGroup> {
-    const result = await this.api.$get<ApiListResponse<DashGroup>>(`/group/dashboard/${id}`);
+    const result = await this.api.$get<DashGroup>(`/group/dashboard/${id}`);
 
-    return result.data;
+    return result;
   }
 
   public async groupDash(): Promise<DashGroup[]> {

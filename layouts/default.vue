@@ -2,7 +2,7 @@
   <v-app dark>
     <v-app-bar fixed app>
       <v-toolbar-title>
-        <v-img src="horus.png" contain max-height="60px" max-width="60px"></v-img>
+        <v-img src="/horus.png" contain max-height="60px" max-width="60px"></v-img>
       </v-toolbar-title>
       <v-btn v-for="menu in menuItems" color="white" plain class="ml-1" :to="menu.url" :key="menu.title">
         {{ menu.title }}
@@ -32,10 +32,6 @@ export default Vue.extend({
         {
           title: "Dashboard",
           url: "/dashboard",
-        },
-        {
-          title: "Groups",
-          url: "/groups",
         },
       ],
     };

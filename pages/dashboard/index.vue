@@ -5,38 +5,40 @@
         <h2>DashBoard</h2>
       </v-col>
     </v-row>
-    <div v-for="group in dashboardData" :key="group.group.id">
-      <h3>{{ group.group.name }}</h3>
-      <v-row>
-        <v-col sm="12" md="12" lg="12">
-          <v-simple-table>
-            <template v-slot:default>
-              <thead>
-                <tr>
-                  <th class="text-left">Name</th>
-                  <th class="text-left">Status</th>
-                  <th class="text-left">Waiting</th>
-                  <th class="text-left">Paused</th>
-                  <th class="text-left">Active</th>
-                  <th class="text-left">Delayed</th>
-                  <th class="text-left">Failed</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="item in group.queues" :key="item.id">
-                  <td>{{ item.name }}</td>
-                  <td>{{ item.status }}</td>
-                  <td>{{ item.jobCounts.waiting }}</td>
-                  <td>{{ item.jobCounts.paused }}</td>
-                  <td>{{ item.jobCounts.active }}</td>
-                  <td>{{ item.jobCounts.delayed }}</td>
-                  <td>{{ item.jobCounts.failed }}</td>
-                </tr>
-              </tbody>
-            </template>
-          </v-simple-table>
-        </v-col>
-      </v-row>
+    <div v-if="dashboardData.length > 0">
+      <div v-for="group in dashboardData" :key="group.group.id">
+          <nuxt-link to="/group/aaa" tag="h3">{{ group.group.name }}</nuxt-link>
+        <v-row>
+          <v-col sm="12" md="12" lg="12">
+            <v-simple-table>
+              <template v-slot:default>
+                <thead>
+                  <tr>
+                    <th class="text-left">Name</th>
+                    <th class="text-left">Status</th>
+                    <th class="text-left">Waiting</th>
+                    <th class="text-left">Paused</th>
+                    <th class="text-left">Active</th>
+                    <th class="text-left">Delayed</th>
+                    <th class="text-left">Failed</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="item in group.queues" :key="item.id">
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.status }}</td>
+                    <td>{{ item.jobCounts.waiting }}</td>
+                    <td>{{ item.jobCounts.paused }}</td>
+                    <td>{{ item.jobCounts.active }}</td>
+                    <td>{{ item.jobCounts.delayed }}</td>
+                    <td>{{ item.jobCounts.failed }}</td>
+                  </tr>
+                </tbody>
+              </template>
+            </v-simple-table>
+          </v-col>
+        </v-row>
+      </div>
     </div>
   </div>
 </template>
@@ -49,9 +51,7 @@ export default Vue.extend({
   name: "IndexPage",
   data() {
     return {
-      logado: '',
-      dashboardData: [] as DashGroup[]
-      ,
+      dashboardData: [] as DashGroup[],
     };
   },
   async created() {
