@@ -3,13 +3,13 @@
     <v-row justify="center" align="center">
       <v-col lg="6">
         <form>
-          <v-text-field v-model="sessionPayload.email" label="E-mail" required outlined >
+          <v-text-field v-model="sessionPayload.email" label="E-mail" required outlined>
           </v-text-field>
 
           <v-text-field
             type="password"
             v-model="sessionPayload.password"
-            label="Senha"
+            label="Passsword"
             required
             outlined
           ></v-text-field>
@@ -24,7 +24,7 @@
 <script lang="ts">
 import Vue from "vue";
 export default Vue.extend({
-  layout: 'empty',
+  layout: 'emptyLayout',
   middleware: "guest",
   data() {
     return {

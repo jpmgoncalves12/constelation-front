@@ -4,8 +4,8 @@ const config: NuxtConfig = {
   ssr: false,
   target: 'static',
   head: {
-    titleTemplate: '%s - constellation-front',
-    title: 'constellation-front',
+    titleTemplate: '%s - Queue controller',
+    title: 'Horus',
     htmlAttrs: {
       lang: 'en'
     },
@@ -19,6 +19,7 @@ const config: NuxtConfig = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
+  css: ["~/assets/main.scss"],
   components: true,
   buildModules: [
     '@nuxt/typescript-build',
@@ -37,10 +38,10 @@ const config: NuxtConfig = {
       dark: true,
       themes: {
         dark: {
-          primary: "#616161",
-          accent: "#424242",
-          secondary: "#FF8F00",
-          info: "#26A69A",
+          primary: "#ffffff",
+          accent: "#1E1F24",
+          secondary: "#db1e72",
+          info: "#25262c",
           warning: "#FFC107",
           error: "#DD2C00",
           success: "#00E676"

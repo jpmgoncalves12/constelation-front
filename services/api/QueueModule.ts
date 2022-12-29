@@ -3,16 +3,7 @@ import {
   ApiResponse,
   ApiResponsePaginated
 } from './types';
-import { IQueue } from '~/types/queue';
-
-interface QueuePayload {
-  name: string
-  host: string
-  port: string
-  groupId: string
-  description: string
-  compliance: string | null
-}
+import { IQueue, QueuePayload } from '~/types/queue';
 
 export class QueueModule extends Module {
   public async create(payload: QueuePayload): Promise<IQueue> {
@@ -21,8 +12,8 @@ export class QueueModule extends Module {
     return result;
   }
 
-  public async getPaginated(page: number, size: number): Promise<IQueue[]> {
-    const result = await this.api.$get<IQueue[]>(`/${this.path}?page=${page}&size=${size}`);
+  public async getPaginated(page: number, size: number): Promise<ApiResponsePaginated<IQueue[]>> {
+    const result = await this.api.$get<ApiResponsePaginated<IQueue[]>>(`/${this.path}?page=${page}&size=${size}`);
 
     return result;
   }
@@ -58,13 +49,13 @@ export class QueueModule extends Module {
   }
 
   public async pauseBulk(payload: string[]): Promise<boolean> {
-    const result = await this.api.$put<boolean>(`/${this.path}/pause`, payload);
+    const result = await this.api.$put<boolean>(`/${this.path}/pause`, {ids: payload});
 
     return result;
   }
 
   public async resumeBulk(payload: string[]): Promise<boolean> {
-    const result = await this.api.$put<boolean>(`/${this.path}/resume`, payload);
+    const result = await this.api.$put<boolean>(`/${this.path}/resume`, {ids: payload});
 
     return result;
   }

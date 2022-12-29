@@ -1,13 +1,9 @@
 import { Module } from './modules';
 import {
-  ApiListResponse,
-  ApiResponsePaginated
+  ApiResponseJobsPaginated
 } from './types';
-import { IJob } from '~/types/job';
+import { IJob, IJobPayload } from '~/types/job';
 
-interface payloadCreateJob {
-  data: any;
-}
 
 interface payloadCreateJobRetryJob {
   jobIds: string[];
@@ -15,9 +11,9 @@ interface payloadCreateJobRetryJob {
 }
 
 
-export class DashModule extends Module {
+export class JobsModule extends Module {
 
-  public async createJob(id: string, payload: payloadCreateJob): Promise<boolean> {
+  public async createJob(id: string, payload: IJobPayload): Promise<boolean> {
     const result = await this.api.$post<boolean>(`${this.path}/${id}/job`, payload);
 
     return result;
@@ -47,8 +43,8 @@ export class DashModule extends Module {
     return result;
   }
 
-  public async getJobPaginate(queueId: string, page: number, size: number, state: string): Promise<ApiResponsePaginated<IJob>> {
-    const result = await this.api.$get<ApiResponsePaginated<IJob>>(`${this.path}/${queueId}/job?state=${state}&page=${page}&size=${size}`);
+  public async getJobPaginate(queueId: string, page: number, size: number, state: string): Promise<ApiResponseJobsPaginated<IJob[]>> {
+    const result = await this.api.$get<ApiResponseJobsPaginated<IJob[]>>(`${this.path}/${queueId}/job?state=${state}&page=${page}&size=${size}`);
 
     return result;
   }
