@@ -1,5 +1,6 @@
 <template>
   <div>
+    <v-breadcrumbs :items="items" divider="/" />
     <v-data-table hide-default-footer show-select v-model="jobsSelected" :loading="loader" :headers="jobHeaders"
       :items="jobs" item-key="id" sort-by="createAt" class="accent" @click:row="openJob">
       <template v-slot:top>
@@ -231,7 +232,7 @@ export default Vue.extend({
       this.$api.dashboard.queueDash(this.$route.params.id).then((res) => {
         this.items[1].text = res.groupId;
         this.items[1].href = "/dashboard/group/" + res.groupId;
-        this.items[2].text = res.name;
+        this.items[2].text = res.id;
         this.items[2].disabled = true;
         this.queueData = res;
       });

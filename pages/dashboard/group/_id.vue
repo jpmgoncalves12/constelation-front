@@ -1,12 +1,13 @@
 <template>
   <div>
+    <v-breadcrumbs :items="items" divider="/" />
     <v-data-table hide-default-footer show-select :headers="queuesHeaders" :items="dashboardData.queues"
       v-model="jobsSelected" @click:row="openQueue" sort-by="createAt" class="accent">
       <template v-slot:top>
-        <div class="d-flex align-center">
-          <p class="px-4 py-4 font-weight-bold text-h6">
+        <div class="d-flex align-center px-4 py-4">
+          <span class="font-weight-bold text-h6">
             {{ dashboardData.group?.name }}
-          </p>
+          </span>
           <v-spacer></v-spacer>
           <v-btn text :disabled="!jobsSelected.length" color="secondary" @click="confirmPause()">
             <v-icon left>mdi-pause</v-icon>
@@ -86,7 +87,7 @@ export default Vue.extend({
         },
         {
           text: "",
-          disabled: false,
+          disabled: true,
           href: "",
         },
       ],
@@ -130,7 +131,7 @@ export default Vue.extend({
     getUpdatedData() {
       this.$api.dashboard.groupDashById(this.$route.params.id).then((res) => {
         this.dashboardData = res;
-        this.items[1].text = res.group.name;
+        this.items[1].text = res.group.id;
         this.items[1].href = "/dashboard/group/" + res.group.id;
       });
     }

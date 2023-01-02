@@ -1,5 +1,6 @@
 <template>
   <div>
+    <v-breadcrumbs :items="items" divider="/" />
     <v-sheet class="px-4 py-4 accent d-flex justify-space-between" >
       <span class="font-weight-bold text-h6">Jobs</span>
       <v-btn text color="secondary" @click="confirmClone()">
@@ -101,6 +102,11 @@ export default Vue.extend({
           href: "/dashboard",
         },
         {
+          text: "-",
+          disabled: true,
+          href: "",
+        },
+        {
           text: "",
           disabled: false,
           href: "",
@@ -117,9 +123,9 @@ export default Vue.extend({
     this.$api.jobs
       .getJob(this.$route.params.id, this.$route.params.jobId)
       .then((res) => {
-        this.items[1].text = this.$route.params.id;
-        this.items[1].href = "/dashboard/queue/" + this.$route.params.id;
-        this.items[2].text = res.id;
+        this.items[2].text = this.$route.params.id;
+        this.items[2].href = "/dashboard/queue/" + this.$route.params.id;
+        this.items[3].text = res.id;
         this.job = res;
       })
       .finally(() => {

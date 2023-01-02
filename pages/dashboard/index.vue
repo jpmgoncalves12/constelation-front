@@ -1,7 +1,7 @@
 <template>
   <div>
-    <v-sheet class="d-flex px-4 py-4 accent align-center mb-2">
-      <span class="font-weight-bold text-h6">Dashboard</span>
+    <v-flex class="d-flex align-center mb-2">
+      <v-breadcrumbs :items="items" divider="/" />
       <v-spacer></v-spacer>
       <v-btn
         text
@@ -21,7 +21,7 @@
         <v-icon left>mdi-play</v-icon>
         <span>Resume</span>
       </v-btn>
-    </v-sheet>
+    </v-flex>
     <div v-for="group in dashboardData" :key="group.group.id">
       <v-data-table
         hide-default-footer
@@ -100,6 +100,12 @@ export default Vue.extend({
         {
           text: "Failed",
           value: "jobCounts.failed",
+        },
+      ],
+      items: [
+        {
+          text: "Dashboard",
+          disabled: true,
         },
       ],
       useCards: false,
